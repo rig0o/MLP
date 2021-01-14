@@ -1,0 +1,13 @@
+C:\Users\rmama\Source\Repos\MLP\MLP\bin\Debug\netcoreapp3.1\MLP.exe
+C:\Users\rmama\Source\Repos\MLP\MLP\bin\Debug\netcoreapp3.1\MLP.deps.json
+C:\Users\rmama\Source\Repos\MLP\MLP\bin\Debug\netcoreapp3.1\MLP.runtimeconfig.json
+C:\Users\rmama\Source\Repos\MLP\MLP\bin\Debug\netcoreapp3.1\MLP.runtimeconfig.dev.json
+C:\Users\rmama\Source\Repos\MLP\MLP\bin\Debug\netcoreapp3.1\MLP.dll
+C:\Users\rmama\Source\Repos\MLP\MLP\bin\Debug\netcoreapp3.1\MLP.pdb
+C:\Users\rmama\Source\Repos\MLP\MLP\obj\Debug\netcoreapp3.1\MLP.csprojAssemblyReference.cache
+C:\Users\rmama\Source\Repos\MLP\MLP\obj\Debug\netcoreapp3.1\MLP.AssemblyInfoInputs.cache
+C:\Users\rmama\Source\Repos\MLP\MLP\obj\Debug\netcoreapp3.1\MLP.AssemblyInfo.cs
+C:\Users\rmama\Source\Repos\MLP\MLP\obj\Debug\netcoreapp3.1\MLP.csproj.CoreCompileInputs.cache
+C:\Users\rmama\Source\Repos\MLP\MLP\obj\Debug\netcoreapp3.1\MLP.dll
+C:\Users\rmama\Source\Repos\MLP\MLP\obj\Debug\netcoreapp3.1\MLP.pdb
+C:\Users\rmama\Source\Repos\MLP\MLP\obj\Debug\netcoreapp3.1\MLP.genruntimeconfig.cache
