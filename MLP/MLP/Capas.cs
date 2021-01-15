@@ -7,7 +7,7 @@ namespace MLP
     class Capas
     {
         public List<Neurona> neuronas;  ///lista de neuronas
-        public double[] outputs; ///salidas de cada neurona, se pasarana la sigiente capa
+        public double[] output; ///salidas de cada neurona, se pasarana la sigiente capa
 
         public Capas(int inputCount, int neuronasCount, Random r)
         {
@@ -19,12 +19,13 @@ namespace MLP
         }
         public double[] activacion(double[] inputs)
         {
-            outputs = new double[neuronas.Count];
+            List<double> outputs = new List<double>();
             for(int i =0; i< neuronas.Count; i++)
             {
-                outputs[i] = neuronas[i].activacion(inputs);
+                outputs.Add(neuronas[i].activacion(inputs));
             }
-           return outputs;
+            output = outputs.ToArray();
+           return outputs.ToArray();
         }
 
     }

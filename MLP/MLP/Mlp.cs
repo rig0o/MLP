@@ -17,8 +17,7 @@ namespace MLP
 
             for(int i = 0; i < numeroNeuronasporCapa.Length; i++)       ///por cada numeroNeuronasporCapa,se agregara una nueva capa
             {
-                capas.Add(new Capas(i == 0 ? 
-                    numeroNeuronasporCapa[i] : numeroNeuronasporCapa[i - 1], numeroNeuronasporCapa[i], r));
+                capas.Add(new Capas(i == 0 ? numeroNeuronasporCapa[i] : numeroNeuronasporCapa[i - 1], numeroNeuronasporCapa[i], r));
             }
 
         }
@@ -38,7 +37,7 @@ namespace MLP
             double error = 0;
             for(int i =0; i< realOutput.Length; i++)
             {
-                error += 0.5 * Math.Pow(realOutput[i] - output[i], 2);  /// el error cuadratico medio
+                error += Math.Pow(realOutput[i] - output[i], 2);  /// el error cuadratico medio
             }
             return error;
         }
@@ -53,16 +52,31 @@ namespace MLP
             return error;
         } 
         
-        public void Aprender(List<double[]> ejemplosInput, List<double[]> ejemplosOutputs, double alfa, double maxError)   ///revisar
+        public bool Aprender(List<double[]> ejemplosInput, List<double[]> ejemplosOutputs, double alfa, double maxError , int maxIterations)   ///revisar
         {
-            double error = 99999999;
+            double error = 99999;
 
             while(error > maxError)
             {
+                maxIterations--;
+                if (maxIterations <= 0)
+                {
+                    Console.WriteLine("---------------------Minimo local-------------------------");
+                    return false;
+                }
+
+                if (Console.KeyAvailable)
+                {
+                    Console.WriteLine("---------------------Boton de escape-------------------------");
+                    //System.IO.File.WriteAllLines(@"C:\Users\ASUS\LogTail.txt", log.ToArray());
+                    return true;
+                }
+               
                 Backpropagation(ejemplosInput,ejemplosOutputs,alfa);
                 error = ErrorGeneral(ejemplosInput, ejemplosOutputs);
                 Console.WriteLine(error);
             }
+            return true;
         }
 
         void ResetearDeltas()                       ///a cada peso le corresponde un delta
@@ -71,13 +85,7 @@ namespace MLP
             for (int i = 0; i < capas.Count; i++)
             {
                 deltas.Add(new double[capas[i].neuronas.Count, capas[i].neuronas[0].pesos.Length]);
-                for (int j = 0; j < capas[i].neuronas.Count; j++)
-                {
-                    for (int k = 0; k < capas[i].neuronas[0].pesos.Length; k++)
-                    {
-                        deltas[i][j, k] = 0;
-                    }
-                }
+                
             }
         }
        
@@ -119,8 +127,8 @@ namespace MLP
                 {
                     if (i == capas.Count - 1)
                     {
-                        double y = capas[i].outputs[j];
-                        sigma[i][j] = (y - outputs[j]) * Neurona.SigmaideDerivada(y);
+                        double y = capas[i].neuronas[j].ultimaActivacion;
+                        sigma[i][j] = (Neurona.Sigmoide(y)-outputs[j]) * Neurona.SigmaideDerivada(y);
                     }
                     else
                     {
@@ -142,7 +150,7 @@ namespace MLP
                 {
                     for(int k = 0; k< capas[i].neuronas[j].pesos.Length; k++)
                     {
-                        deltas[i][j, k] += sigma[i][j] * capas[i-1].outputs[k]; 
+                        deltas[i][j, k] += sigma[i][j] * Neurona.Sigmoide(capas[i-1].neuronas[k].ultimaActivacion); 
                     }
                 }
             }
@@ -154,8 +162,9 @@ namespace MLP
             {
                 Activacion(inputs[i]);
                 SetSigmas(outputs[i]);
-                AddDelta();
-                SetBias(alfa);          ///van a ser modificados por cada vez que introduzcamos un valor de input y sea comparado con outputs
+                
+                SetBias(alfa);
+                AddDelta();        ///van a ser modificados por cada vez que introduzcamos un valor de input y sea comparado con outputs
             }
             SetPesos(alfa);         ///van a ser modificados por cada vez que aprendamos
         }

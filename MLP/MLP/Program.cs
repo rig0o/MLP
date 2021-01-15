@@ -25,7 +25,7 @@ namespace MLP
 
 
             Mlp p = new Mlp(new int[] { entradas[0].Length, 3, salidas[0].Length });
-            p.Aprender(entradas, salidas, 1.6, 0.01);
+            p.Aprender(entradas, salidas, 0.03, 0.01,50000);
             while (true)
             {
                 Console.WriteLine("inserte valores");

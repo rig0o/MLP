@@ -13,23 +13,24 @@ namespace MLP
 
         public Neurona(int inputCount, Random r)// constructor -- inputCount = numero de entradas a la neurona
         {
-            bias = r.NextDouble();
+            bias = 10 * r.NextDouble() - 5;//r.NextDouble();
             pesos = new double[inputCount];
             for(int i = 0; i < inputCount; i++)
             {
-                pesos[i] = r.NextDouble();              ///por cada entrada i, se le asigna un peso aleatorio
+                pesos[i] = 10 * r.NextDouble() - 5;// r.NextDouble();              ///por cada entrada i, se le asigna un peso aleatorio
             }
         
         }
 
         public double activacion(double[] inputs)               ///sumatoria regresión lineal
         {
-            double ultimaActivacion = bias;
+            double activacion1 = bias;
             for(int i = 0; i < inputs.Length; i++)
             {
-                ultimaActivacion += inputs[i] * pesos[i];       ///entrada por su peso
+                activacion1 += inputs[i] * pesos[i];       ///entrada por su peso
             }
-            return Sigmoide(ultimaActivacion);
+            ultimaActivacion = activacion1;
+            return Sigmoide(activacion1);
         }
 
 
